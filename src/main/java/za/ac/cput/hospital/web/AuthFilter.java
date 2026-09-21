@@ -1,0 +1,3 @@
+package za.ac.cput.hospital.web;
+import jakarta.servlet.*;import jakarta.servlet.annotation.WebFilter;import jakarta.servlet.http.*;import java.io.IOException;
+@WebFilter("/*") public class AuthFilter implements Filter{public void doFilter(ServletRequest a,ServletResponse b,FilterChain c)throws IOException,ServletException{HttpServletRequest q=(HttpServletRequest)a;HttpServletResponse s=(HttpServletResponse)b;String p=q.getServletPath();boolean open=p.equals("/login")||p.equals("/register")||p.startsWith("/assets/");if(open||q.getSession(false)!=null&&q.getSession(false).getAttribute("user")!=null)c.doFilter(a,b);else s.sendRedirect(q.getContextPath()+"/login");}}

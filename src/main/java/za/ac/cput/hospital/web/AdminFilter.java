@@ -1,0 +1,3 @@
+package za.ac.cput.hospital.web;
+import jakarta.servlet.*;import jakarta.servlet.annotation.WebFilter;import jakarta.servlet.http.*;import za.ac.cput.hospital.model.User;import java.io.IOException;
+@WebFilter("/users") public class AdminFilter implements Filter{public void doFilter(ServletRequest a,ServletResponse b,FilterChain c)throws IOException,ServletException{HttpServletRequest q=(HttpServletRequest)a;HttpServletResponse s=(HttpServletResponse)b;User u=(User)q.getSession().getAttribute("user");if(u!=null&&(u.role().equals("ADMIN")||u.role().equals("SYSTEM_ADMIN")))c.doFilter(a,b);else s.sendError(403,"Administrator access required");}}
